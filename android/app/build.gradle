@@ -71,13 +71,14 @@ import com.android.build.OutputFile
  *   extraPackagerArgs: []
  * ]
  */
-
+  
 project.ext.react = [
     entryFile: "index.js"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
-
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -107,6 +108,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        missingDimensionStrategy 'react-native-camera', 'general' 
     }
     splits {
         abi {
@@ -138,6 +140,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-sqlite-storage')
+    implementation project(':react-native-config')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-svg')
     implementation project(':react-native-share')

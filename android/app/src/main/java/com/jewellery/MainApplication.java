@@ -3,6 +3,7 @@ package com.jewellery;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import cl.json.RNSharePackage;
@@ -13,6 +14,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import org.pgsqlite.SQLitePluginPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,15 +29,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new RNSharePackage(),
-            new LinearGradientPackage(),
-            new RNGestureHandlerPackage(),
-            new RNCameraPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new SQLitePluginPackage(),
+          new ReactNativeConfigPackage(), new VectorIconsPackage(), new SvgPackage(), new RNSharePackage(),
+          new LinearGradientPackage(), new RNGestureHandlerPackage(), new RNCameraPackage());
     }
 
     @Override

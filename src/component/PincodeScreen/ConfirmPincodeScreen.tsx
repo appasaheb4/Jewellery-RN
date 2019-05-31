@@ -13,38 +13,11 @@ import {
 } from "react-native";
 import { StackActions, NavigationActions } from "react-navigation";
 import CodeInput from "react-native-confirmation-code-input";
-import * as Keychain from "react-native-keychain";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-
-
-//TODO: Custome Pages
-import Loader from "Jewellery/src/app/custcompontes/Loader/ModelLoader";
-import CustomeStatusBar from "Jewellery/src/app/custcompontes/CustomeStatusBar/CustomeStatusBar";
-import FullLinearGradientButton from "Jewellery/src/app/custcompontes/LinearGradient/Buttons/FullLinearGradientButton";
-
-
-//TODO: Custome StyleSheet Files       
-import globalStyle from "Jewellery/src/app/manager/Global/StyleSheet/Style";
-
 //TODO: Custome Object
-import {
-    colors,
-    localDB,
-    images,
-    asyncStorageKeys
-} from "Jewellery/src/app/constants/Constants";
-var dbOpration = require( "Jewellery/src/app/manager/database/DBOpration" );
-var utils = require( "Jewellery/src/app/constants/Utils" );
-import renderIf from "Jewellery/src/app/constants/validation/renderIf";
-import Singleton from "Jewellery/src/app/constants/Singleton";
-
-//TODO: Bitcoin Files   
-//TODO: Local Varible    
-let isNetwork: Boolean;
-
-//TODO: Localization   
-import { localization } from "Jewellery/src/app/manager/Localization/i18n";
+import { colors, images, asyncStorageKeys } from "Jewellery/src/app/constant/Constants";
+import renderIf from "Jewellery/src/app/constant/validation/renderIf";
 
 
 
@@ -66,22 +39,7 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
             ],
             isLoading: false
         };
-        isNetwork = utils.getNetwork();
     }
-
-    // async componentDidMount() {
-    //   // let mnemonic = await utils.getMnemonic();
-    //   // alert( { mnemonic } );
-    //   this.setState( {
-    //     mnemonicValues: utils.getMnemonic()
-    //   } );
-    // }
-
-
-
-
-
-
     onCheckPincode( code: any ) {
         this.setState( {
             pincode: code
@@ -118,29 +76,12 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
     saveData = async () => {
         try {
             let code = this.state.pincode;
-            let commonData = Singleton.getInstance();
-            commonData.setPasscode( code );
-            const username = "Jewellery";
-            const password = code;
-
-            // Store the credentials
-            await Keychain.setGenericPassword( username, password );
             AsyncStorage.setItem(
-                asyncStorageKeys.flag_PasscodeCreate,
+                asyncStorageKeys.flag_Pincode,
                 JSON.stringify( true )
             );
-            const resetAction = StackActions.reset( {
-                index: 0, // <-- currect active route from actions array
-                key: null,
-                actions: [
-                    NavigationActions.navigate( { routeName: "RestoreAndWalletSetupNavigator" } )
-                ]
-            } );
-            AsyncStorage.setItem(
-                asyncStorageKeys.rootViewController,
-                "RestoreAndWalletSetupNavigator"
-            );
-            this.props.navigation.dispatch( resetAction );
+            console.log( { code } );
+
         } catch ( e ) {
             console.log( { e } );
         }
@@ -149,23 +90,23 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
     render() {
         return (
             <View style={ styles.container }>
-                <CustomeStatusBar backgroundColor={ colors.white } flagShowStatusBar={ true } barStyle="dark-content" />
+                {/* <CustomeStatusBar backgroundColor={ colors.white } flagShowStatusBar={ true } barStyle="dark-content" /> */ }
                 <KeyboardAwareScrollView
                     enableOnAndroid
                     extraScrollHeight={ 40 }
                     contentContainerStyle={ { flexGrow: 1, } }
                 >
                     <View style={ styles.viewAppLogo }>
-                        <Image style={ styles.imgAppLogo } source={ images.appIcon } />
+                        <Image style={ styles.imgAppLogo } source={ images.logo } />
                         <Text
-                            style={ [ globalStyle.ffFiraSansBold, { color: "#000000", marginTop: 20 } ] }
+                            style={ [ { color: "#000000", marginTop: 20 } ] }
                         >
-                            Hello, Crypto wizard
+                            Hello
             </Text>
                     </View>
                     <View style={ styles.viewFirstPasscode }>
                         <Text
-                            style={ [ globalStyle.ffFiraSansMedium, { marginTop: 10, color: "#8B8B8B" } ] }
+                            style={ [ { marginTop: 10, color: "#8B8B8B" } ] }
                             note
                         >
                             Create Passcode
@@ -193,7 +134,6 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
                                 backgroundColor: "#F1F1F1"
                             } }
                             onFulfill={ code => this.onCheckPincode( code ) }
-                            type='withoutcharacters'
                         />
                     </View>
                     <View style={ styles.viewSecoundPasscode }>
@@ -227,13 +167,12 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
                             onFulfill={ ( isValid, code ) =>
                                 this._onFinishCheckingCode2( isValid, code )
                             }
-                            type='withoutcharacters'
                         />
                         { renderIf( this.state.passcodeSecoundStyle[ 0 ].activeColor == "red" )(
-                            <Text style={ [ globalStyle.ffFiraSansBookItalic, { color: "red", marginTop: 44 } ] }>{ this.state.success }</Text>
+                            <Text style={ [ { color: "red", marginTop: 44 } ] }>{ this.state.success }</Text>
                         ) }
                     </View>
-                    <View style={ styles.viewBtnProceed }>
+                    {/* <View style={ styles.viewBtnProceed }>
                         <FullLinearGradientButton
                             style={ [
                                 this.state.status == true ? { opacity: 1 } : { opacity: 0.4 }, { borderRadius: 5 } ] }
@@ -241,9 +180,9 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
                             title="PROCEED"
                             click_Done={ () => this.saveData() }
                         />
-                    </View>
+                    </View> */}
                 </KeyboardAwareScrollView>
-                <Loader loading={ this.state.isLoading } color={ colors.appColor } size={ 30 } />
+                {/* <Loader loading={ this.state.isLoading } color={ colors.appColor } size={ 30 } /> */ }
             </View>
         );
     }
@@ -274,4 +213,4 @@ const styles = StyleSheet.create( {
         height: 150,
         width: 150
     }
-} );
+} );  

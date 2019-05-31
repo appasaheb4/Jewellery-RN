@@ -1,10 +1,12 @@
 /**
  * @format
  */
-
+import React, { Component } from "react";
 import { AppRegistry } from 'react-native';
-import App from './App';
+import { createAppContainer } from "react-navigation";
 import { name as appName } from './app.json';
+import LaunchingScreen from 'Jewellery/src/component/LaunchingScreen/LaunchingScreen';
+import { createRootNavigator } from "Jewellery/src/app/router/Router";
 
 
 export default class Jewellery extends React.Component
@@ -43,7 +45,7 @@ export default class Jewellery extends React.Component
         );
         const AppContainer = createAppContainer( Layout );
         return this.state.status ? (
-            <LaunchScreen
+            <LaunchingScreen
                 onComplited={ ( status: boolean, pageName: string ) =>
                     this.onComplited( status, pageName )
                 }

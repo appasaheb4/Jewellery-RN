@@ -1,8 +1,6 @@
 import moment from "moment";
 import DeviceInfo from "react-native-device-info";
-import Singleton from "Jewellery/src/app/constants/Singleton";
 //TODO: Date Format
-
 const getUnixTimeDate = date => {
   const dateTime = new Date( date ).getTime();
   const lastUpdateDate = Math.floor( dateTime / 1000 );

@@ -13,15 +13,13 @@ var colors = {
   placeholder: "#5F5F5F"
 };
 
-
 const assetsImages = "../../assets/images/";
 var images = {
   appBackgound: require( assetsImages + "img/backgound.jpeg" ),
   logo: require( assetsImages + "icons/logo.png" ),
 };
 
-
-//Local Database
+//Local Database    
 var localDB = {
   dbName: Config.DB_NAME,
   tableName: {
@@ -29,8 +27,14 @@ var localDB = {
   }
 };
 
+var asyncStorageKeys = {
+  flag_Pincode: "flag_Pincode"
+}
+
+
 export {
   localDB,
   colors,
-  images
-};
+  images,
+  asyncStorageKeys
+};   

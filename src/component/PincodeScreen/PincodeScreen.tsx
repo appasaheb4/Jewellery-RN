@@ -15,31 +15,17 @@ import { StackActions, NavigationActions } from "react-navigation";
 import CodeInput from "react-native-confirmation-code-input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-//TODO: Custome Pages
-import CustomeStatusBar from "Jewellery/src/app/custcompontes/CustomeStatusBar/CustomeStatusBar";
-import FullLinearGradientButton from "Jewellery/src/app/custcompontes/LinearGradient/Buttons/FullLinearGradientButton";
 
-//TODO: Custome StyleSheet Files       
-import globalStyle from "Jewellery/src/app/manager/Global/StyleSheet/Style";
 
-//TODO: Custome Object   
-import {
-    colors,
-    images,
-    localDB,
-    asyncStorageKeys
-} from "Jewellery/src/app/constants/Constants";
-import utils from "Jewellery/src/app/constants/Utils";
-import Singleton from "Jewellery/src/app/constants/Singleton";
-var dbOpration = require( "Jewellery/src/app/manager/database/DBOpration" );
-import renderIf from "Jewellery/src/app/constants/validation/renderIf";
+//TODO: Custome Object     
+import { colors, images, asyncStorageKeys } from "Jewellery/src/app/constant/Constants";
+import renderIf from "Jewellery/src/app/constant/validation/renderIf";
 
-export default class PincodeScreen extends Component {
+export default class PincodeScreen extends Component<any, any> {
 
     constructor ( props: any ) {
         super( props );
         this.state = {
-            mnemonicValues: [],
             status: false,
             pincode: "",
             success: "Passcode does not match!",
@@ -55,34 +41,6 @@ export default class PincodeScreen extends Component {
     }
 
     //TODO: Page Life Cycle
-    componentWillMount() {
-        this.retrieveData();
-    }
-
-    async componentDidMount() {
-        const resultWallet = await dbOpration.readTablesData(
-            localDB.tableName.tblWallet
-        );
-        console.log( { resultWallet } );
-        await utils.setWalletDetails( resultWallet.temp[ 0 ] );
-    }
-
-    retrieveData = async () => {
-        try {
-            const resultWallet = await dbOpration.readTablesData(
-                localDB.tableName.tblWallet
-            );
-            await utils.setWalletDetails( resultWallet.temp );
-            // AsyncStorage.setItem( "flag_BackgoundApp", JSON.stringify( true ) );
-            const credentials = await Keychain.getGenericPassword();
-            this.setState( {
-                pincode: credentials.password
-            } );
-        } catch ( error ) {
-            console.log( error );
-        }
-    }
-
     _onFinishCheckingCode( isValid: boolean, code: string ) {
         if ( isValid ) {
             this.setState( {
@@ -110,81 +68,11 @@ export default class PincodeScreen extends Component {
 
 
     onSuccess = async ( code: string ) => {
-        const rootViewController = await AsyncStorage.getItem( asyncStorageKeys.rootViewController );
-        // console.log( { rootViewController } );
-        let pageName = utils.getRootViewController();
-        let walletDetails = await comFunDBRead.readTblWallet();
-        if ( pageName != "TrustedPartyShareSecretNavigator" && pageName != "OTPScreenNavigator" ) {
-            const resetAction = StackActions.reset( {
-                index: 0, // <-- currect active route from actions array
-                key: null,
-                actions: [
-                    NavigationActions.navigate( {
-                        routeName: rootViewController
-                    } )
-                ]
-            } );
-            this.props.navigation.dispatch( resetAction );
-        } else {
-            const resetAction = StackActions.reset( {
-                index: 0, // <-- currect active route from actions array
-                key: null,
-                actions: [
-                    NavigationActions.navigate( {
-                        routeName: pageName
-                    } )
-                ]
-            } );
-            this.props.navigation.dispatch( resetAction );
-        }
-
+        console.log( { code } );
     };
-
-
-
-    //TODO: func urlDecription
-    async urlDecription( code: any ) {
-        let commonData = Singleton.getInstance();
-        let pageName = commonData.getRootViewController();
-        var script = commonData.getDeepLinkingUrl();
-        script = script.split( "_+_" ).join( "/" );
-        let deepLinkingUrl = utils.decrypt( script, code.toString() );
-        if ( deepLinkingUrl ) {
-            const resultWallet = await dbOpration.readTablesData(
-                localDB.tableName.tblWallet
-            );
-            console.log( { resultWallet } );
-            let publicKey = resultWallet.temp[ 0 ].publicKey;
-            let JsonDeepLinkingData = JSON.parse( deepLinkingUrl );
-            if ( publicKey == JsonDeepLinkingData.cpk ) {
-                console.log( "same public key" );
-                Keyboard.dismiss();
-            } else {
-                const resetAction = StackActions.reset( {
-                    index: 0, // <-- currect active route from actions array
-                    key: null,
-                    actions: [
-                        NavigationActions.navigate( {
-                            routeName: pageName,
-                            params: {
-                                data: deepLinkingUrl
-                            }
-                        } )
-                    ]
-                } );
-                this.props.navigation.dispatch( resetAction );
-            }
-            commonData.setRootViewController( "TabbarBottom" );
-            this.setState( { flag_dialogShow: false } );
-        } else {
-            this.refs.codeInputRefUrlEncp.clear();
-        }
-    }
-
     render() {
         return (
             <View style={ styles.container }>
-                <CustomeStatusBar backgroundColor={ colors.white } flagShowStatusBar={ true } barStyle="dark-content" />
                 <KeyboardAwareScrollView
                     enableAutomaticScroll
                     automaticallyAdjustContentInsets={ true }
@@ -193,16 +81,16 @@ export default class PincodeScreen extends Component {
                     contentContainerStyle={ { flexGrow: 1 } }
                 >
                     <View style={ styles.viewAppLogo }>
-                        <Image style={ styles.imgAppLogo } source={ images.appIcon } />
+                        <Image style={ styles.imgAppLogo } source={ images.logo } />
                         <Text
-                            style={ [ globalStyle.ffFiraSansBold, { color: "#000000", marginTop: 20 } ] }
+                            style={ [ { color: "#000000", marginTop: 20 } ] }
                         >
                             Hello, Crypto wizard
             </Text>
                     </View>
                     <View style={ styles.viewPasscode }>
                         <Text
-                            style={ [ globalStyle.ffFiraSansMedium, { marginTop: 10, color: "#8B8B8B" } ] }
+                            style={ [ { marginTop: 10, color: "#8B8B8B" } ] }
                         >
                             Re - Enter Passcode{ " " }
                         </Text>
@@ -230,21 +118,10 @@ export default class PincodeScreen extends Component {
                             onFulfill={ ( isValid, code ) =>
                                 this._onFinishCheckingCode( isValid, code )
                             }
-                            type='withoutcharacters'
                         />
                         { renderIf( this.state.passcodeStyle[ 0 ].activeColor == "red" )(
-                            <Text style={ [ globalStyle.ffFiraSansBookItalic, { color: "red", marginTop: 44 } ] }>{ this.state.success }</Text>
+                            <Text style={ [ { color: "red", marginTop: 44 } ] }>{ this.state.success }</Text>
                         ) }
-                    </View>
-                    <View style={ styles.viewBtnProceed }>
-                        <FullLinearGradientButton
-                            style={ [
-                                this.state.status == true ? { opacity: 1 } : { opacity: 0.4 },
-                                { borderRadius: 5 } ] }
-                            disabled={ this.state.status == true ? false : true }
-                            title="LOGIN"
-                            click_Done={ () => this.onSuccess( this.state.pincode ) }
-                        />
                     </View>
                 </KeyboardAwareScrollView>
             </View>
