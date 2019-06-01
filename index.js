@@ -16,7 +16,7 @@ export default class Jewellery extends React.Component
         super( props );
         this.state = {
             status: true,
-            isStartPage: "PincodeNavigator"
+            isStartPage: "PasscodeNavigator"
         };
     }
 

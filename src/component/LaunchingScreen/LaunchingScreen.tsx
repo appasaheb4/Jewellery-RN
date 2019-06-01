@@ -32,10 +32,10 @@ export default class LaunchingScreen extends Component<Props, any> {
         let status = JSON.parse( value );
         setTimeout( () => {
             if ( status ) {
-                this.props.onComplited( false, "PincodeNavigator" );
+                this.props.onComplited( false, "PasscodeNavigator" );
             }
             else {
-                this.props.onComplited( false, "ConfirmPincodeNavigator" );
+                this.props.onComplited( false, "ConfirmPasscodeNavigator" );
             }
         }, 1000 );
         Animated.timing( this.state.centerLogoOpticy, {

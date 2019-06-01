@@ -1,5 +1,6 @@
 import moment from "moment";
 import DeviceInfo from "react-native-device-info";
+
 //TODO: Date Format
 const getUnixTimeDate = date => {
   const dateTime = new Date( date ).getTime();
@@ -12,22 +13,6 @@ const getUnixToDateFormat = unixDate => {
 };
 const getUnixToNormaDateFormat = unixDate => {
   return moment.unix( unixDate ).format( "DD-MM-YYYY" );
-};
-
-
-
-const encrypt = ( data: any, password: string ) => {
-  let ciphertext = CryptoJS.AES.encrypt( data, password );
-  return ciphertext.toString();
-};
-
-const decrypt = ( data: any, password: string ) => {
-  let bytes = CryptoJS.AES.decrypt( data, password );
-  let str = false;
-  try {
-    str = bytes.toString( CryptoJS.enc.Utf8 );
-  } catch ( e ) { }
-  return str;
 };
 
 //TODO: for sorting date wise transaction data
@@ -108,8 +93,6 @@ module.exports = {
   getUnixTimeDate,
   getUnixToDateFormat,
   getUnixToNormaDateFormat,
-  encrypt,
-  decrypt,
   sortFunction,
   date_diff_indays,
   getDeviceModel,

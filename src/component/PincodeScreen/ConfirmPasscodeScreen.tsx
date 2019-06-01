@@ -15,6 +15,11 @@ import { StackActions, NavigationActions } from "react-navigation";
 import CodeInput from "react-native-confirmation-code-input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+
+//TODO: Custome Comp
+import FullLinearGradientButton from "Jewellery/src/app/custcompontes/LinearGradient/Buttons/FullLinearGradientButton";
+
+
 //TODO: Custome Object
 import { colors, images, asyncStorageKeys } from "Jewellery/src/app/constant/Constants";
 import renderIf from "Jewellery/src/app/constant/validation/renderIf";
@@ -22,7 +27,7 @@ import renderIf from "Jewellery/src/app/constant/validation/renderIf";
 
 
 
-export default class ConfirmPincodeScreen extends Component<any, any> {
+export default class ConfirmPasscodeScreen extends Component<any, any> {
     constructor ( props: any ) {
         super( props );
         this.state = {
@@ -80,8 +85,14 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
                 asyncStorageKeys.flag_Pincode,
                 JSON.stringify( true )
             );
-            console.log( { code } );
-
+            const resetAction = StackActions.reset( {
+                index: 0, // <-- currect active route from actions array
+                key: null,
+                actions: [
+                    NavigationActions.navigate( { routeName: "TabNavigator" } )
+                ]
+            } );
+            this.props.navigation.dispatch( resetAction );
         } catch ( e ) {
             console.log( { e } );
         }
@@ -172,7 +183,7 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
                             <Text style={ [ { color: "red", marginTop: 44 } ] }>{ this.state.success }</Text>
                         ) }
                     </View>
-                    {/* <View style={ styles.viewBtnProceed }>
+                    <View style={ styles.viewBtnProceed }>
                         <FullLinearGradientButton
                             style={ [
                                 this.state.status == true ? { opacity: 1 } : { opacity: 0.4 }, { borderRadius: 5 } ] }
@@ -180,7 +191,7 @@ export default class ConfirmPincodeScreen extends Component<any, any> {
                             title="PROCEED"
                             click_Done={ () => this.saveData() }
                         />
-                    </View> */}
+                    </View>
                 </KeyboardAwareScrollView>
                 {/* <Loader loading={ this.state.isLoading } color={ colors.appColor } size={ 30 } /> */ }
             </View>

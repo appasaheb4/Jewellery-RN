@@ -925,6 +925,11 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/node@^10.12.18":
+  version "10.14.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.8.tgz#fe444203ecef1162348cd6deb76c62477b2cc6e9"
+  integrity sha512-I4+DbJEhLEg4/vIy/2gkWDvXBOOtPKV9EnLhYjMoqxcRW+TTZtUftkHktz/a8suoD5mUL7m6ReLrkPvSsCQQmw==
+
 "@types/prop-types@*":
   version "15.7.1"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
@@ -5151,6 +5156,11 @@ react-native-confirmation-code-input@^1.0.4:
     lodash "^4.17.4"
     prop-types "^15.5.10"
 
+react-native-device-info@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.0.3.tgz#599502a7da165185bd853396df00e488ef8d7c83"
+  integrity sha512-Vb/IDhSz+BfjSM769s/YdA3JOuMg/a5u6hhkmf7VDHYIoCCFRJWAR0U8ud+nrkvl+4So26jt/krtcFoS1RAjcg==
+
 react-native-drawer@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
@@ -5173,6 +5183,13 @@ react-native-gesture-handler@^1.2.1:
   dependencies:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
+    prop-types "^15.5.10"
+
+react-native-grid-component@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-grid-component/-/react-native-grid-component-2.0.0.tgz#e8861d2a00051d87abc814adda6ae0d973fee7e5"
+  integrity sha512-OMJ/YMSuEO+eDjIqK/Psh/Qf0P4HBYIddWeCJiPGoPJOKIRl/F4Kc5QqtUoINjent0VXYdnhWBKHg5dRHGFtsQ==
+  dependencies:
     prop-types "^15.5.10"
 
 react-native-iphone-x-helper@^1.0.3:

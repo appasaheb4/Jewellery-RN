@@ -21,7 +21,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { colors, images, asyncStorageKeys } from "Jewellery/src/app/constant/Constants";
 import renderIf from "Jewellery/src/app/constant/validation/renderIf";
 
-export default class PincodeScreen extends Component<any, any> {
+//TODO: Custome Comp
+import FullLinearGradientButton from "Jewellery/src/app/custcompontes/LinearGradient/Buttons/FullLinearGradientButton";
+
+export default class PasscodeScreen extends Component<any, any> {
 
     constructor ( props: any ) {
         super( props );
@@ -67,8 +70,15 @@ export default class PincodeScreen extends Component<any, any> {
     }
 
 
-    onSuccess = async ( code: string ) => {
-        console.log( { code } );
+    onSuccess = async () => {
+        const resetAction = StackActions.reset( {
+            index: 0, // <-- currect active route from actions array
+            key: null,
+            actions: [
+                NavigationActions.navigate( { routeName: "TabNavigator" } )
+            ]
+        } );
+        this.props.navigation.dispatch( resetAction );
     };
     render() {
         return (
@@ -122,6 +132,15 @@ export default class PincodeScreen extends Component<any, any> {
                         { renderIf( this.state.passcodeStyle[ 0 ].activeColor == "red" )(
                             <Text style={ [ { color: "red", marginTop: 44 } ] }>{ this.state.success }</Text>
                         ) }
+                    </View>
+                    <View style={ styles.viewBtnProceed }>
+                        <FullLinearGradientButton
+                            style={ [
+                                this.state.status == true ? { opacity: 1 } : { opacity: 0.4 }, { borderRadius: 5 } ] }
+                            disabled={ this.state.status == true ? false : true }
+                            title="PROCEED"
+                            click_Done={ () => this.onSuccess() }
+                        />
                     </View>
                 </KeyboardAwareScrollView>
             </View>

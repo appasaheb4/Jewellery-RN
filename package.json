@@ -18,6 +18,7 @@
     "android-relase": "ENVFILE=.env.dev react-native run-android --variant=release"
   },
   "dependencies": {
+    "@types/node": "^10.12.18",
     "moment": "^2.24.0",
     "native-base": "^2.12.1",
     "react": "16.8.3",
@@ -25,7 +26,9 @@
     "react-native-camera": "^2.9.0",
     "react-native-config": "^0.11.7",
     "react-native-confirmation-code-input": "^1.0.4",
+    "react-native-device-info": "^2.0.3",
     "react-native-gesture-handler": "^1.2.1",
+    "react-native-grid-component": "^2.0.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-permissions": "^1.1.1",
