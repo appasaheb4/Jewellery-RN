@@ -19,8 +19,6 @@ export default class Jewellery extends React.Component
             isStartPage: "PasscodeNavigator"
         };
     }
-
-
     onComplited ( status, pageName )
     {
         try

@@ -10,8 +10,12 @@ import ConfirmPasscodeScreen from "Jewellery/src/component/PincodeScreen/Confirm
 import PasscodeScreen from "Jewellery/src/component/PincodeScreen/PasscodeScreen";
 
 
-//TODO: Tabbar 
+//TODO: Tabbar    
 import HomeScreen from "Jewellery/src/component/TabbarScreen/HomeScreen/HomeScreen";
+//import DrawerScreen from "Jewellery/src/component/DrawerScreen/DrawerScreen";
+import SettingScreen from "Jewellery/src/component/TabbarScreen/SettingScreen/SettingScreen";
+
+
 
 
 //TODO: StackNavigator
@@ -41,7 +45,7 @@ const OnBoardingStackNavigator = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
     {
         HomeScreen: {
-            screen: HomeScreen, //PaymentScreen,
+            screen: HomeScreen,
             navigationOptions: {
                 tabBarLabel: "Home", //localization("TabBarItem.Payment"),
                 tabBarIcon: ( { tintColor } ) => (
@@ -49,10 +53,25 @@ const TabNavigator = createBottomTabNavigator(
                 ),
 
             }
+        },
+        SettingScreen: {
+            screen: SettingScreen,
+            navigationOptions: {
+                tabBarLabel: "Setting", //localization("TabBarItem.Payment"),
+                tabBarIcon: ( { tintColor } ) => (
+                    <Icon name="cog" color={ tintColor } size={ 22 } />
+                ),
+            }
         }
+
     },
     {
         initialRouteName: "HomeScreen",
+        //contentComponent: DrawerScreen,
+        // drawerPosition: "left",   
+        // drawerOpenRoute: "DrawerOpen",
+        // drawerCloseRoute: "DrawerClose",
+        // drawerToggleRoute: "DrawerToggle",
         tabBarOptions: {
             showLabel: true,
             //swipeEnabled: true,
