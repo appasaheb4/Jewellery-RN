@@ -88,7 +88,7 @@ export default class HomeScreen extends Component<any, any> {
                     <Left>
                         <Button
                             transparent
-                            onPress={ () => Alert.alert( 'working' ) }
+                            onPress={ () => this.props.navigation.toggleDrawer() }
                         >
                             <Icon name="bars" size={ 25 } color="#ffffff" />
                         </Button>

@@ -28,10 +28,10 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 
 //TODO: Custome Object 
-import { colors, localDB, apiary, asyncStorageKeys } from "RoundTable/src/app/constant/Constants";
+import { colors, localDB, apiary, asyncStorageKeys } from "../../app/constant/Constants";
 
-//TODO: Json Files
-import menuData from "RoundTable/src/assets/jsonfiles/components/DrawerScreen/LeftMenuList.json";
+//TODO: Json Files         
+import menuData from "../../assets/jsonfiles/components/DrawerScreen/LeftMenuList.json";
 
 export default class DrawerScreen extends Component<any, any> {
     constructor ( props: any ) {
@@ -87,7 +87,7 @@ export default class DrawerScreen extends Component<any, any> {
                                         onPress={ this.navigateToScreen( item.pageName ) }
                                     >
                                         <View style={ styles.menuItem }>
-                                            <Icon name={ item.icon } size={ 30 } color="#ffffff" />
+                                            <Icon name={ item.icon } size={ 30 } color={ colors.appColor } />
                                             <Text style={ styles.txtMenuItem }>{ item.title }</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create( {
     },
     txtMenuItem: {
         paddingLeft: 10,
-        color: "#ffffff",
+        color: "#000000",
         fontSize: 20
     },
     //Scrolling:viewScrollingList

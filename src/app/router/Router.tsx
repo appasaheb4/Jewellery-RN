@@ -12,7 +12,7 @@ import PasscodeScreen from "Jewellery/src/component/PincodeScreen/PasscodeScreen
 
 //TODO: Tabbar    
 import HomeScreen from "Jewellery/src/component/TabbarScreen/HomeScreen/HomeScreen";
-//import DrawerScreen from "Jewellery/src/component/DrawerScreen/DrawerScreen";
+import DrawerScreen from "Jewellery/src/component/DrawerScreen/DrawerScreen";
 import SettingScreen from "Jewellery/src/component/TabbarScreen/SettingScreen/SettingScreen";
 
 
@@ -67,11 +67,6 @@ const TabNavigator = createBottomTabNavigator(
     },
     {
         initialRouteName: "HomeScreen",
-        //contentComponent: DrawerScreen,
-        // drawerPosition: "left",   
-        // drawerOpenRoute: "DrawerOpen",
-        // drawerCloseRoute: "DrawerClose",
-        // drawerToggleRoute: "DrawerToggle",
         tabBarOptions: {
             showLabel: true,
             //swipeEnabled: true,
@@ -85,6 +80,36 @@ const TabNavigator = createBottomTabNavigator(
                 backgroundColor: "#ffffff"
             },
             tabStyle: {}
+        }
+    }
+);
+
+
+
+const LeftDrawerNavigator = createDrawerNavigator(
+    {
+        Home: {
+            screen: TabNavigator,
+            navigationOptions: {
+                drawerLabel: "Home",
+                drawerIcon: ( { tintColor } ) => <Icon name="home" size={ 17 } />
+            }
+        }
+    },
+
+    {
+        initialRouteName: "Home",
+        contentComponent: DrawerScreen,
+        drawerPosition: "left",
+        drawerOpenRoute: "DrawerOpen",
+        drawerCloseRoute: "DrawerClose",
+        drawerToggleRoute: "DrawerToggle",
+        contentOptions: {
+            activeTintColor: "#e91e63",
+            style: {
+                flex: 1,
+                paddingTop: 15
+            }
         }
     }
 );
@@ -107,7 +132,7 @@ export const createRootNavigator = (
                 navigationOptions: { header: null }
             },
             TabNavigator: {
-                screen: TabNavigator,
+                screen: LeftDrawerNavigator,
                 navigationOptions: { header: null }
             }
         },
