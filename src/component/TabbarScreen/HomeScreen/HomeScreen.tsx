@@ -14,6 +14,7 @@ import {
     ListItem,
     Thumbnail
 } from "native-base";
+import Slideshow from 'react-native-image-slider-show';
 
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Grid from "react-native-grid-component";
@@ -41,13 +42,43 @@ export default class HomeScreen extends Component<any, any> {
                 icon: "bars"
             },
             ],
+            position: 1,
+            interval: null,
+            dataSource: [
+                {
+                    title: 'Title 1',
+                    caption: 'Caption 1',
+                    url: 'https://reactnativecode.com/wp-content/uploads/2018/12/slideshow_1.png',
+                }, {
+                    title: 'Title 2',
+                    caption: 'Caption 2',
+                    url: 'http://placeimg.com/640/480/any',
+                }, {
+                    title: 'Title 3',
+                    caption: 'Caption 3',
+                    url: 'https://reactnativecode.com/wp-content/uploads/2018/12/slideshow_1.png',
+                },
+            ],
             isLoading: true
         };
     }
 
+    componentWillMount() {
+        this.setState( {
+            interval: setInterval( () => {
+                this.setState( {
+                    position: this.state.position === this.state.dataSource.length ? 0 : this.state.position + 1
+                } );
+            }, 5000 )
+        } );
+    }
     //TODO: click on item grid
     click_Item( title: any ) {
 
+    }
+
+    componentWillUnmount() {
+        clearInterval( this.state.interval );
     }
 
     //TODO: Grid System
@@ -115,7 +146,14 @@ export default class HomeScreen extends Component<any, any> {
                     </Right>
                 </Header>
                 <Content contentContainerStyle={ styles.container }>
-                    <View style={ { flex: 1, padding: 5 } }>
+                    <View style={ { flex: 0.45 } }>
+                        <Slideshow
+                            dataSource={ this.state.dataSource }
+                            position={ this.state.position }
+                            containerStyle={ { marginTop: 0 } }
+                            onPositionChanged={ position => this.setState( { position } ) } />
+                    </View>
+                    <View style={ { flex: 1 } }>
                         <Grid
                             style={ styles.list }
                             renderItem={ this._renderItem }
