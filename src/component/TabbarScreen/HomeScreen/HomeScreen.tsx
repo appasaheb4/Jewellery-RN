@@ -73,8 +73,11 @@ export default class HomeScreen extends Component<any, any> {
         } );
     }
     //TODO: click on item grid
-    click_Item( title: any ) {
-
+    click_Item( item: any ) {
+        let title = item.title;
+        if ( title == "New Customer" ) {
+            this.props.navigation.push( "NewCustomerNavigator" );
+        }
     }
 
     componentWillUnmount() {
@@ -90,7 +93,7 @@ export default class HomeScreen extends Component<any, any> {
             ] }
             key={ i }
         >
-            <TouchableOpacity onPress={ () => this.click_Item( data.title ) }>
+            <TouchableOpacity onPress={ () => this.click_Item( data ) }>
                 <Icon
                     name={ data.icon }
                     style={ { marginTop: 15, alignSelf: "center" } }

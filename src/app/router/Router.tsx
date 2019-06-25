@@ -16,10 +16,16 @@ import DrawerScreen from "Jewellery/src/component/DrawerScreen/DrawerScreen";
 import SettingScreen from "Jewellery/src/component/TabbarScreen/SettingScreen/SettingScreen";
 
 
+//New Customer
+import CustomerListScreen from "Jewellery/src/component/DrawerScreen/NewCustomerScreen/CustomerListScreen";
+import NewCustomerScreen from "Jewellery/src/component/DrawerScreen/NewCustomerScreen/NewCustomerScreen";
+
+
+
 
 
 //TODO: StackNavigator
-//TODO: StackNavigator:ONBoarding
+//TODO: On Boarding Stack Navigator
 const OnBoardingStackNavigator = createStackNavigator(
     {
         ConfirmPasscodeScreen: {
@@ -36,7 +42,22 @@ const OnBoardingStackNavigator = createStackNavigator(
     }
 );
 
-
+//TODO: New Customer Stack Navigator
+const NewCustomerStackNavigator = createStackNavigator(
+    {
+        CustomerListScreen: {
+            screen: CustomerListScreen,
+            navigationOptions: { header: null }
+        },
+        NewCustomerScreen: {
+            screen: NewCustomerScreen,
+            navigationOptions: { header: null }
+        }
+    },
+    {
+        initialRouteName: "CustomerListScreen"
+    }
+);
 
 
 //TODO: TabNavigator
@@ -133,6 +154,11 @@ export const createRootNavigator = (
             },
             TabNavigator: {
                 screen: LeftDrawerNavigator,
+                navigationOptions: { header: null }
+            },
+            //New Customer
+            NewCustomerNavigator: {
+                screen: NewCustomerStackNavigator,
                 navigationOptions: { header: null }
             }
         },

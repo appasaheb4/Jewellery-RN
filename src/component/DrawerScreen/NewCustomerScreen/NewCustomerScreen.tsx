@@ -14,67 +14,19 @@ import {
     ListItem,
     Thumbnail
 } from "native-base";
-
 import Icon from "react-native-vector-icons/FontAwesome5";
-import Grid from "react-native-grid-component";
+
+//TODO: Custome Object
 import { colors } from "Jewellery/src/app/constant/Constants";
 
 export default class NewCustomerScreen extends Component<any, any> {
-
     constructor ( props: any ) {
         super( props );
         this.state = {
-            data: [ {
-                title: "New Customer",
-                icon: "users"
-            },
-            {
-                title: "two",
-                icon: "bars"
-            },
-            {
-                title: "three",
-                icon: "bars"
-            },
-            ],
-            isLoading: true
+            flag_Loading: true
         };
     }
 
-    //TODO: click on item grid
-    click_Item( title: any ) {
-
-    }
-
-    //TODO: Grid System
-    _renderItem = ( data: any, i: any ) => (
-        <View
-            style={ [
-                { backgroundColor: colors.appColor },
-                styles.item
-            ] }
-            key={ i }
-        >
-            <TouchableOpacity onPress={ () => this.click_Item( data.title ) }>
-                <Icon
-                    name={ data.icon }
-                    style={ { marginTop: 15, alignSelf: "center" } }
-                    color="#fff"
-                    size={ 30 }
-                />
-                <Text
-                    style={ {
-                        fontSize: 14,
-                        fontWeight: "bold",
-                        color: "#fff",
-                        marginTop: 10
-                    } }
-                >
-                    { data.title }
-                </Text>
-            </TouchableOpacity>
-        </View>
-    );
     render() {
         return (
             <Container>
@@ -110,12 +62,7 @@ export default class NewCustomerScreen extends Component<any, any> {
                 </Header>
                 <Content contentContainerStyle={ styles.container }>
                     <View style={ { flex: 1, padding: 5 } }>
-                        <Grid
-                            style={ styles.list }
-                            renderItem={ this._renderItem }
-                            data={ this.state.data }
-                            itemsPerRow={ 3 }
-                        />
+                        <Text>New  Customer</Text>
                     </View>
                 </Content>
             </Container>
@@ -123,19 +70,9 @@ export default class NewCustomerScreen extends Component<any, any> {
     }
 }
 
+
 const styles = StyleSheet.create( {
     container: {
-        flex: 1
-    },
-    //Grid System
-    item: {
-        flex: 1,
-        height: 80,
-        margin: 1,
-        borderRadius: 5,
-        alignItems: "center"
-    },
-    list: {
         flex: 1
     }
 } );
