@@ -1,2 +1,3 @@
 # Jewellery-RN
-offline android,ios app
+## React-native + Redux
+offline android,ios app      

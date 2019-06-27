@@ -156,7 +156,7 @@ export default class HomeScreen extends Component<any, any> {
                             containerStyle={ { marginTop: 0 } }
                             onPositionChanged={ position => this.setState( { position } ) } />
                     </View>
-                    <View style={ { flex: 1 } }>
+                    <View style={ { flex: 1, padding: 5 } }>
                         <Grid
                             style={ styles.list }
                             renderItem={ this._renderItem }
